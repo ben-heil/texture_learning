@@ -11,3 +11,8 @@ Simply navigate to the root of the texture\_learning directory and run the comma
 conda env create -f environment.yml
 conda activate texture
 ```
+
+If your jupyter notebook is having trouble finding the modules it needs, you can install the conda environment as a kernel with the command
+```sh
+python -m ipykernel install --user --name texture --display-name "texture"
+```
