@@ -18,7 +18,7 @@ from PIL import Image
 import numpy as np
 
 
-# In[35]:
+# In[2]:
 
 
 """
@@ -131,7 +131,7 @@ def patchswap(image, p, n):
     return(image)
 
 
-# In[36]:
+# In[3]:
 
 
 """A pytorch dataset class that retrieves and modifies images in real time"""
@@ -150,15 +150,19 @@ class tgenerator(data.Dataset):
         self.link = IDlink
         self.list_IDs = listdir(IDlink)
         self.mode = 'None'
-        
-        self.transformer = transforms.Compose([
-            transforms.Resize(256),
-            transforms.ToTensor()
-        ])
+        self.imageview = True
+        self.transformer = transforms.Compose([transforms.Resize(255),
+                                    transforms.CenterCrop(224),
+                                    transforms.ToTensor(),
+                                    transforms.Normalize(mean=[0, 0, 0], std=[1, 1, 1])])
     
     def __len__(self):
         'Denotes the total number of samples'
         return len(self.list_IDs)
+
+    def viewmode(self):
+        'Switch Image import mode'
+        self.imageview = not self.imageview
     
     def setmode_none(self):
         self.mode = 'none'
@@ -178,12 +182,13 @@ class tgenerator(data.Dataset):
         self.mode = 'uniformnoise'
         self.theta = theta
         
-    def setparams(self, size):
+    def setparams(self, resize=255, centercrop=224):
         self.size = size
-        self.transformer = transforms.Compose([
-            transforms.Resize(size),
-            transforms.ToTensor()
-        ])
+        self.transformer = transforms.Compose([transforms.Resize(resize),
+                                    transforms.CenterCrop(centercrop),
+                                    transforms.ToTensor(),
+                                    transforms.Normalize(mean=[0, 0, 0], std=[1, 1, 1])]
+        )
     
     def __getitem__(self, index):
         'Generates one sample of data'
@@ -203,6 +208,8 @@ class tgenerator(data.Dataset):
             
         if(self.mode == 'uniformnoise'):
             X = uniformnoiser(X, self.theta)
+
+        if(not self.imageview):
+            X = X.permute(2,0,1)
             
         return X
-
