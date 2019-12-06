@@ -7,5 +7,3 @@ Almost none of the code here was written by/belongs to our project group.
 In a few places we had to modify the source code to make it compatible with python 3.7. These include:
 
 - In line 26 of Misc.py, `net.blobs.keys()` is replaced by `list(net.blobs.keys())` to allow indexing
-
--
