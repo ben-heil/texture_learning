@@ -7,8 +7,8 @@ In this repository we compare the performance of various models on texturised im
 ## TL;DR
 Our team's demonstration notebook is [PCAlogistic-ProjectNB.ipynb](code/PCAlogistic-ProjectNB.ipynb). 
 The data can be downloaded from [this Kaggle competition](https://www.kaggle.com/c/plant-seedlings-classification/data).
-Store the training/test directories within the data subdirectory.
-The necessary libraries for running our code can be installed with `conda env create -f environment.yml`
+Store the training/test directories within the `data` subdirectory.
+The necessary libraries for running our code can be installed with `conda env create -f environment.yml`.
 Run [texturize\_images.ipynb](code/texturize_images.ipynb) to ensure the texturized test data is created before you try to use it.
 
 ## Installation
