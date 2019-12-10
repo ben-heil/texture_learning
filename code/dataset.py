@@ -128,7 +128,7 @@ class tgenerator(data.Dataset):
         Corruption Modes:
             1. None: return clean resized image
             2. patchswap: swap patches of pixels
-            3. noiseypatch: Randomly select patches of pixels and replace them with randomly
+            3. noisypatch: Randomly select patches of pixels and replace them with randomly
                             distributed noise
             4. uniformnoise: For each pixel, replace that pixel's color values with noisy
                 versions of that pixel's color values
@@ -136,7 +136,7 @@ class tgenerator(data.Dataset):
     def __init__(self, IDlink):
         'Initialization'
         self.link = IDlink
-        self.list_IDs = listdir(IDlink)
+        self.list_IDs = [img for img in listdir(IDlink) if '.png' in img]
         self.mode = 'None'
         self.imageview = True
         self.transformer = transforms.Compose([transforms.Resize(255),
@@ -162,8 +162,8 @@ class tgenerator(data.Dataset):
         self.p = p
         self.n = n
 
-    def setmode_noiseypatch(self, theta=1/4, p=1, n=0):
-        self.mode = 'noiseypatch'
+    def setmode_noisypatch(self, theta=1/4, p=1, n=0):
+        self.mode = 'noisypatch'
         self.theta = theta
         self.p = p
         self.n = n
@@ -193,7 +193,7 @@ class tgenerator(data.Dataset):
         if(self.mode == 'patchswap'):
             X = patchswap(X, self.p, self.n)
 
-        if(self.mode == 'noiseypatch'):
+        if(self.mode == 'noisypatch'):
             X = patchnoiser(X, self.theta, self.p, self.n)
 
         if(self.mode == 'uniformnoise'):
