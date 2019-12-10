@@ -36,3 +36,5 @@ The code directory stores various modules and notebooks used in the training and
 `dataset.py` contains utility functions for distorting images, and `dataset.ipynb` demonstrates their usage.
 
 `bagnet_train.ipynb`, `dummyclassifier.ipynb`, `five_layer_CNN_train.ipynb`, `resnet_train.ipynb`, `PCAlogistic-ProjectNB.ipynb`, and `vgg_train.ipynb` all train and evaluate their respective models.
+
+The `DeepImageSynthesis` directory contains code from Gatys et al. for use in texturizing images.
